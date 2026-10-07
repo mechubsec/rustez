@@ -5,15 +5,19 @@ edition = "2021"
 authors = ["fastrevmd-lab"]
 description = "CLI for rustEZ — Junos device automation from the terminal"
 license = "MIT"
-repository = "https://github.com/fastrevmd-lab/rustez"
+repository = "https://github.com/mechubsec/rustez"
 # not published to crates.io.
 publish = false
 
 [dependencies]
 rustez = { path = "../rustez" }
-rustnetconf = "0.17"
+rustnetconf = "0.18"
 tokio = { version = "1", features = ["full"] }
 clap = { version = "4", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rpassword = "7"
+
+[dev-dependencies]
+# Test-only: fixtures for --password-file's permission and symlink checks.
+tempfile = "3"
