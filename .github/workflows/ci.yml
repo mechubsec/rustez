@@ -91,11 +91,22 @@ jobs:
       # below that unsatisfiable. Confirmed against unmodified `main`, which
       # fails identically at its own declared MSRV.
       #
+      # `rustnetconf` 0.18.1 tightened its own `russh` requirement to
+      # `>=0.63.2, <0.64`, and `russh` 0.63.2+ declares `rust-version = 1.89`.
+      # rustez's `rustnetconf = "0.18"` lets a fresh resolve pick up 0.18.1, so
+      # pin back to 0.18.0, whose `russh = "^0.62"` is satisfiable at 1.86.
+      # That still resolves `russh` 0.62.7's own transitive `ctutils` to 0.4.3,
+      # which independently declared `rust-version = 1.87`; pin it to 0.4.2
+      # (rust-version 1.85) as well.
+      #
       # Pinning the last compatible release keeps this job measuring *our* floor
-      # rather than the registry's. Drop the pin when it is no longer needed; the
+      # rather than the registry's. Drop a pin when it is no longer needed; the
       # failure names the crate and the version it wants, which is the diagnosis.
       - name: Pin dependencies that dropped support for the declared MSRV
-        run: cargo update -p aes --precise 0.9.2
+        run: |
+          cargo update -p aes --precise 0.9.2
+          cargo update -p rustnetconf --precise 0.18.0
+          cargo update -p ctutils --precise 0.4.2
 
       - name: cargo check at the declared MSRV
         run: cargo +1.86.0 check -p rustez
