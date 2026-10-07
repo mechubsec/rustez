@@ -24,9 +24,9 @@ PyEZ is the de facto Python library for Junos automation. It works, but:
 
 rustEZ gives you the same Junos automation capabilities with:
 
-- **10-100x faster** — async Rust with tokio for parallel operations across thousands of devices
+- **Native async concurrency** — async Rust with tokio enables parallel operations across thousands of devices
 - **Compile-time safety** — typed RPCs, typed facts, typed configs. Wrong RPC? The compiler tells you
-- **Native async concurrency** — `tokio::join!` across 1000 devices is one line of code
+- **Parallel operations** — `tokio::join!` makes it trivial to run thousands of device operations in parallel
 
 ## Architecture
 
