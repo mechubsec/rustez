@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Package metadata links.** The PyPI package and both publishable crates
-  now carry homepage, repository, documentation, changelog and issues URLs,
-  so their package pages link back to the project.
+- **Package metadata links.** The PyPI package now carries homepage,
+  repository, documentation, changelog and issues URLs via `[project.urls]`.
+  The `rustez` crate's `Cargo.toml` gains `homepage` and `documentation`
+  alongside its existing `repository` field. Together these make the PyPI
+  and crates.io package pages link back to the project.
 
 ## [0.19.0] — 2026-09-30
 
