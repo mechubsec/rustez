@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Package metadata links.** The PyPI package and both publishable crates
+  now carry homepage, repository, documentation, changelog and issues URLs,
+  so their package pages link back to the project.
+
 ## [0.19.0] — 2026-09-30
 
 ### Changed

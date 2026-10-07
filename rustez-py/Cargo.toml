@@ -6,6 +6,8 @@ authors = ["fastrevmd-lab"]
 description = "Python bindings for rustEZ — pip install rustez"
 license = "MIT"
 repository = "https://github.com/mechubsec/rustez"
+homepage = "https://github.com/mechubsec/rustez"
+documentation = "https://github.com/mechubsec/rustez#readme"
 # published to PyPI via maturin, not crates.io.
 publish = false
 
