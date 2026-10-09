@@ -162,7 +162,7 @@ async def main():
 
 ## Platform Support (Python)
 
-PyPI wheels are published for **Linux x86_64 only**:
+PyPI wheels are published for **Linux x86_64 only (CPython 3.12; manylinux/musllinux)**:
 
 | Platform | Wheel | Status |
 |----------|-------|--------|
@@ -176,7 +176,7 @@ For unsupported platforms, build from source with [maturin](https://github.com/P
 ```bash
 pip install maturin
 git clone https://github.com/mechubsec/rustez.git
-cd rustEZ && maturin build --release -m rustez-py/Cargo.toml
+cd rustez && maturin build --release -m rustez-py/Cargo.toml
 pip install target/wheels/*.whl
 ```
 

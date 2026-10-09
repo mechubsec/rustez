@@ -9,6 +9,7 @@ description = "Python bindings for rustEZ — Junos device automation built on R
 requires-python = ">=3.9"
 license = "MIT"
 dependencies = ["lxml>=4.9.0"]
+classifiers = ["License :: OSI Approved :: MIT License"]
 
 [project.urls]
 Homepage = "https://github.com/mechubsec/rustez"
