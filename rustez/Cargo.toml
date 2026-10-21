@@ -10,10 +10,10 @@ homepage = "https://github.com/mechubsec/rustez"
 documentation = "https://docs.rs/rustez"
 keywords = ["junos", "juniper", "netconf", "network", "automation"]
 categories = ["network-programming"]
-rust-version = "1.86"
+rust-version = "1.89"
 
 [dependencies]
-rustnetconf = "0.18"
+rustnetconf = "0.18.2"
 tokio = { version = "1", features = ["full"] }
 quick-xml = "0.42"
 thiserror = "2"
