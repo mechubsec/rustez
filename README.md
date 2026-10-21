@@ -230,8 +230,8 @@ Verified on a real device with all integration tests passing:
 | Crate | Version | Purpose |
 |-------|---------|---------|
 | [pyo3](https://crates.io/crates/pyo3) | 0.29 | Python FFI bindings |
-| rustez | 0.18.0 | Core library |
-| rustnetconf | 0.15 | NETCONF client |
+| rustez | 0.19.1 | Core library |
+| rustnetconf | 0.18.2 | NETCONF client |
 | tokio | 1 | Async runtime |
 
 Python runtime dependency: [lxml](https://pypi.org/project/lxml/) >= 4.9.0
