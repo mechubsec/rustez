@@ -14,7 +14,8 @@
 # the workflows' `components:` inputs redundant but harmless.
 #
 # Note this pins the *gate*, not the MSRV — rustez/Cargo.toml still declares
-# rust-version = "1.79", and nothing here verifies that floor.
+# rust-version = "1.89", and nothing here verifies that floor. The CI `msrv`
+# job does, with `cargo +1.89.0 check -p rustez`.
 [toolchain]
 channel = "1.98.0"
 components = ["clippy", "rustfmt"]
