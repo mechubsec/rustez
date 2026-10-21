@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   alongside its existing `repository` field. Together these make the PyPI
   and crates.io package pages link back to the project.
 
+### Security
+
+- **rustnetconf floor raised to 0.18.2**, which requires russh
+  `>=0.64.1, <0.65` (GHSA-4wc5-f2rc-q74m, GHSA-j7h2-66j4-ghjf). The old
+  `"0.18"` requirement let dependents still resolve 0.18.0 and russh 0.62.x.
+  No API change.
+
+### Changed
+
+- **MSRV raised from 1.86 to 1.89**, matching rustnetconf 0.18.2 and russh
+  0.64. The CI MSRV job no longer pins `rustnetconf`, `aes` or `ctutils` back.
+
 ## [0.19.0] — 2026-09-30
 
 ### Changed

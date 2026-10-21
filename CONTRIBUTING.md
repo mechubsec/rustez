@@ -38,8 +38,7 @@ cargo deny check bans sources licenses
 If you change a public API, also check it still compiles at the declared MSRV (see `rust-toolchain.toml` for why the CI pin and the MSRV floor are tracked separately):
 
 ```sh
-cargo update -p aes --precise 0.9.2   # same pin CI uses; see the msrv job in ci.yml
-cargo +1.86.0 check -p rustez
+cargo +1.89.0 check -p rustez
 ```
 
 ### Integration tests
