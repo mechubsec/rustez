@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0] — 2026-10-25
+
+### Changed
+
+- **rustnetconf 0.19.0** (breaking, re-exported through
+  `RustEzError::Netconf`). `TransportError` gains `Config` (local setup that
+  cannot succeed unchanged, e.g. a bad `ProxyCommand` or a `RejectAll`
+  host-key refusal) and `Credentials` (a key file or agent that cannot be
+  used), and is `#[non_exhaustive]`. `Connect` now means only that the device
+  was unreachable, and `Auth` that it rejected the credentials. Code matching
+  `TransportError` exhaustively needs a wildcard arm. See rustnetconf's
+  CHANGELOG for the full reclassification table.
+- **rustez-cli:** `Credentials` exits with the `auth` code and `Config` with
+  the `usage` code, instead of both reading as `connect`.
+- **Python:** `classify_error` keeps each failure's 0.18 exception class:
+  `credentials error:` is `ConnectAuthError` and `configuration error:` is
+  `TransportError`. One deliberate change: an authentication exchange that
+  broke mid-way (`connection failed: ... auth exchange failed`) is now
+  `TransportError`, not `ConnectAuthError`, since the device never rejected
+  anything. All three match only the native transport envelope, so device
+  RPC error text cannot impersonate them.
+
+### Security
+
+- Through rustnetconf 0.19.0's floors: `crypto-bigint` 0.7.9
+  (RUSTSEC-2026-0387), `ctutils` 0.4.5 (RUSTSEC-2026-0385), `tokio` 1.54.1
+  (RUSTSEC-2026-0386).
+
 ## [0.19.1] — 2026-10-21
 
 ### Added
@@ -487,7 +515,8 @@ the floor was still `0.14.3`:
   was `AcceptAll`. Since `rustnetconf 0.11` the default has been `RejectAll`
   (fail-closed); the docs now reflect this.
 
-[Unreleased]: https://github.com/mechubsec/rustez/compare/v0.19.1...HEAD
+[Unreleased]: https://github.com/mechubsec/rustez/compare/v0.20.0...HEAD
+[0.20.0]: https://github.com/mechubsec/rustez/compare/v0.19.1...v0.20.0
 [0.19.1]: https://github.com/mechubsec/rustez/compare/v0.19.0...v0.19.1
 [0.19.0]: https://github.com/mechubsec/rustez/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/mechubsec/rustez/compare/v0.17.0...v0.18.0

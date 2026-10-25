@@ -100,7 +100,9 @@ pub fn classify(err: &RustEzError, phase: Phase) -> ErrorKind {
 
     match err {
         RustEzError::Netconf(NetconfError::Transport(t)) => match t {
-            TransportError::Auth(_) => ErrorKind::Auth,
+            TransportError::Auth(_) | TransportError::Credentials(_) => ErrorKind::Auth,
+            // Local setup that cannot succeed unchanged, like `SshConfig` below.
+            TransportError::Config(_) => ErrorKind::Usage,
             _ => ErrorKind::Connect,
         },
         RustEzError::Netconf(NetconfError::Framing(_)) => ErrorKind::Connect,
@@ -146,6 +148,15 @@ mod tests {
             "bad creds".into(),
         )));
         assert_eq!(classify(&err, Phase::Connect), ErrorKind::Auth);
+    }
+
+    #[test]
+    fn local_setup_and_credential_errors_are_not_connect() {
+        let transport = |t| RustEzError::Netconf(NetconfError::Transport(t));
+        let unreadable_key = transport(TransportError::Credentials("key".into()));
+        assert_eq!(classify(&unreadable_key, Phase::Connect), ErrorKind::Auth);
+        let bad_proxy = transport(TransportError::Config("proxy".into()));
+        assert_eq!(classify(&bad_proxy, Phase::Connect), ErrorKind::Usage);
     }
 
     #[test]
