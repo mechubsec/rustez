@@ -92,6 +92,22 @@ def classify_error(exc: Exception) -> RustEzError:
     if "rpc timeout" in msg_lower or msg_lower.startswith("timeout:"):
         return RpcTimeoutError(msg)
 
+    # rustnetconf >= 0.19 local setup errors (unreadable key, empty agent, bad
+    # ProxyCommand). Anchored on the native transport envelope so device RPC
+    # error text containing the same words cannot impersonate them.
+    # Each keeps the class the same failure raised under rustnetconf 0.18.
+    transport = "netconf error: transport error: "
+    if msg_lower.startswith(transport + "credentials error:"):
+        return ConnectAuthError(msg)
+    if msg_lower.startswith(transport + "configuration error:"):
+        return TransportError(msg)
+    # Before the broad "auth" check: "connection failed: password auth
+    # exchange failed" is a broken link, not rejected credentials.
+    if msg_lower.startswith(transport + "connection failed:"):
+        if "timed out" in msg_lower:
+            return ConnectTimeoutError(msg)
+        return TransportError(msg)
+
     # Auth errors
     if "auth" in msg_lower or "permission denied" in msg_lower or "authentication" in msg_lower:
         return ConnectAuthError(msg)
