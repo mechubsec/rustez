@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.1] — 2026-10-30
+
+### Security
+
+- Require rustnetconf 0.19.1, which moves to russh 0.65. This picks up
+  CVE-2026-116794 and the client-side fixes in that release: unbounded allocation
+  from repeated `EXT_INFO` packets (GHSA-4p9f-7p9m-5vfg) and a channel stall on a
+  zero maximum packet size (GHSA-fw5c-8223-6h42). No rustez API change.
+
 ## [0.20.0] — 2026-10-25
 
 ### Changed
@@ -515,7 +524,8 @@ the floor was still `0.14.3`:
   was `AcceptAll`. Since `rustnetconf 0.11` the default has been `RejectAll`
   (fail-closed); the docs now reflect this.
 
-[Unreleased]: https://github.com/mechubsec/rustez/compare/v0.20.0...HEAD
+[Unreleased]: https://github.com/mechubsec/rustez/compare/v0.20.1...HEAD
+[0.20.1]: https://github.com/mechubsec/rustez/compare/v0.20.0...v0.20.1
 [0.20.0]: https://github.com/mechubsec/rustez/compare/v0.19.1...v0.20.0
 [0.19.1]: https://github.com/mechubsec/rustez/compare/v0.19.0...v0.19.1
 [0.19.0]: https://github.com/mechubsec/rustez/compare/v0.18.0...v0.19.0
